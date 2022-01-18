@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>JQuery - Periodic Table of Elements - Element Selector</title>
+        <link rel="stylesheet" type="text/css" href="jquery.pte.dark.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+        <script src="http://jquery-pte.googlecode.com/files/jquery.pte.min.js"></script>
+	<script src="jquery.pte.js"></script>
+    </head>
+    <body>
+	     
+        <input type="text" id="element" name="element" readonly="readonly" onfocus="show_pte()" />
+	<br> 
+        <label for="element">
+            <span style="font-size:small;color:#AAA;">Click to select element.</span>
+        </label>
+	<br><br> 
+        <script>
+	    document.addEventListener("DOMContentLoaded", function() {
+		show_pte();
+	    });
+            function select_element(element){
+                $('.periodic_table').remove();
+                $('#element').val(element.ATOMIC_NUMBER);
+            }
+            function show_pte() {
+                $('<div>').addClass('periodic_table').appendTo('body').pte({
+                    data : 'jquery.pte.json',
+                    config : {
+                        x:$('#element').position().left,
+                        y:$('#element').position().top,
+                        tooltip:false,
+                        closable:false,
+                        size:24,
+                        spacing:1
+                    },
+                    clickHandler :select_element
+                });
+            }
+        </script>
+    </body>
+</html>
